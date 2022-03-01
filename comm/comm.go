@@ -37,7 +37,7 @@ func NewConnection(address string, timelimit ...time.Duration) (c *Comm, err err
 		}
 		socks5ProxyURL, urlParseError := url.Parse(Socks5Proxy)
 		if urlParseError != nil {
-			err = fmt.Errorf("Unable to parse socks proxy url:%s", urlParseError)
+			err = fmt.Errorf("Unable to parse socks proxy url: %v", urlParseError)
 			log.Debug(err)
 			return
 		}
@@ -126,7 +126,7 @@ func (c *Comm) Read() (buf []byte, numBytes int, bs []byte, err error) {
 	header = make([]byte, 4)
 	_, err = io.ReadFull(c.connection, header)
 	if err != nil {
-		log.Debigf("initial read error:%v", err)
+		log.Debugf("initial read error:%v", err)
 		return
 	}
 	var numBytesUint32 uint32
